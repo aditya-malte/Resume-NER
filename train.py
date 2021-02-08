@@ -2,6 +2,7 @@ import argparse
 import numpy as np
 import torch
 from transformers import BertForTokenClassification, BertTokenizerFast
+from transformers import LongformerForTokenClassification, LongformerTokenizer
 from torch.utils.data import Dataset, DataLoader, RandomSampler, SequentialSampler
 from torch.optim import Adam
 from utils import trim_entity_spans, convert_goldparse, ResumeDataset, tag2idx, idx2tag, get_hyperparameters, train_and_val_model
