@@ -1,7 +1,7 @@
 import argparse
 import numpy as np
 import torch
-from transformers import BertForTokenClassification, BertTokenizerFast
+from transformers import BertForTokenClassification, BertTokenizerFast, AutoTokenizer
 from transformers import LongformerForTokenClassification, LongformerTokenizerFast
 from torch.utils.data import Dataset, DataLoader, RandomSampler, SequentialSampler
 from torch.optim import Adam
@@ -22,7 +22,8 @@ MAX_LEN = 4096
 EPOCHS = args['e']
 MAX_GRAD_NORM = 1.0
 MODEL_NAME = 'allenai/longformer-base-4096'
-TOKENIZER = LongformerTokenizerFast('./vocab/vocab.txt', lowercase=True)
+#TOKENIZER = LongformerTokenizerFast('./vocab/vocab.txt', lowercase=True)
+tokenizer = AutoTokenizer.from_pretrained(pretrained_model_name_or_path = 'allenai/longformer-base-4096', use_fast=True, lowercase=True)
 #TOKENIZER = BertTokenizerFast('./vocab/vocab.txt', lowercase=True)
 DEVICE = torch.device("cuda")
 print(DEVICE)
