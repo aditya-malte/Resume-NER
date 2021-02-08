@@ -22,7 +22,7 @@ MAX_LEN = 4096
 EPOCHS = args['e']
 MAX_GRAD_NORM = 1.0
 MODEL_NAME = 'longformer-base-4096'
-TOKENIZER = LongformerTokenizer.from_pretrained('longformer-base-4096', lowercase=True)
+TOKENIZER = LongformerTokenizer.from_pretrained('allenai/longformer-base-4096', lowercase=True)
 #TOKENIZER = BertTokenizerFast('./vocab/vocab.txt', lowercase=True)
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 print(DEVICE)
