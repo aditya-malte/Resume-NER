@@ -11,6 +11,7 @@ parser = argparse.ArgumentParser(description='Train Bert-NER')
 parser.add_argument('-e', type=int, default=5, help='number of epochs')
 parser.add_argument('-o', type=str, default='.',
                     help='output path to save model state')
+parser.add_argument('-model-name', type=str, default='bert-base-uncased', 'model to use for training')
 
 args = parser.parse_args().__dict__
 
@@ -19,10 +20,10 @@ output_path = args['o']
 MAX_LEN = 500
 EPOCHS = args['e']
 MAX_GRAD_NORM = 1.0
-MODEL_NAME = 'bert-base-uncased'
+MODEL_NAME = args['model-name']
 TOKENIZER = BertTokenizerFast('./vocab/vocab.txt', lowercase=True)
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-
+print(DEVICE)
 data = trim_entity_spans(convert_goldparse('data/Resumes.json'))
 
 total = len(data)
