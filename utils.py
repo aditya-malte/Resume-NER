@@ -112,8 +112,8 @@ def process_resume(data, tokenizer, tag2idx, max_len, is_test=False):
         curr_sent['labels'] = curr_sent['labels'] + ([0] * padding_length)
 
     curr_sent['input_ids'] = tok['input_ids'] + ([0] * padding_length)
-    curr_sent['token_type_ids'] = tok['token_type_ids'] + \
-        ([0] * padding_length)
+    #curr_sent['token_type_ids'] = tok['token_type_ids'] + \
+    #    ([0] * padding_length)
     curr_sent['attention_mask'] = tok['attention_mask'] + \
         ([0] * padding_length)
     return curr_sent
