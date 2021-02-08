@@ -11,17 +11,18 @@ parser = argparse.ArgumentParser(description='Train Bert-NER')
 parser.add_argument('-e', type=int, default=5, help='number of epochs')
 parser.add_argument('-o', type=str, default='.',
                     help='output path to save model state')
-parser.add_argument('-model-name', type=str, default='bert-base-uncased', 'model to use for training')
+
 
 args = parser.parse_args().__dict__
 
 output_path = args['o']
 
-MAX_LEN = 500
+MAX_LEN = 4096
 EPOCHS = args['e']
 MAX_GRAD_NORM = 1.0
-MODEL_NAME = args['model-name']
-TOKENIZER = BertTokenizerFast('./vocab/vocab.txt', lowercase=True)
+MODEL_NAME = 'longformer-base-4096'
+TOKENIZER = LongformerTokenizer.from_pretrained('longformer-base-4096', lowercase=True)
+#TOKENIZER = BertTokenizerFast('./vocab/vocab.txt', lowercase=True)
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 print(DEVICE)
 data = trim_entity_spans(convert_goldparse('data/Resumes.json'))
@@ -37,8 +38,9 @@ train_dl = DataLoader(train_d, sampler=train_sampler, batch_size=8)
 
 val_dl = DataLoader(val_d, batch_size=4)
 
-model = BertForTokenClassification.from_pretrained(
-    MODEL_NAME, num_labels=len(tag2idx))
+#model = BertForTokenClassification.from_pretrained(MODEL_NAME, num_labels=len(tag2idx))
+model = LongformerForTokenClassification.from_pretrained(MODEL_NAME, num_labels=len(tag2idx))
+
 model.to(DEVICE)
 optimizer_grouped_parameters = get_hyperparameters(model, True)
 optimizer = Adam(optimizer_grouped_parameters, lr=3e-5)
