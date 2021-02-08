@@ -23,7 +23,7 @@ EPOCHS = args['e']
 MAX_GRAD_NORM = 1.0
 MODEL_NAME = 'allenai/longformer-base-4096'
 #TOKENIZER = AutoTokenizer.from_pretrained(pretrained_model_name_or_path = 'allenai/longformer-base-4096', use_fast=True, lowercase=True)
-TOKENIZER = AutoTokenizer.from_pretrained('allenai/longformer-base-4096', use_fast=True)
+TOKENIZER = LongformerTokenizerFast.from_pretrained("allenai/longformer-base-4096")
 #TOKENIZER = PreTrainedTokenizerFast('./vocab/vocab.txt', lowercase=True)
 TOKENIZER.add_tokens(["[PAD]","[UNK]","[CLS]","[SEP]","[MASK]"])
 DEVICE = torch.device("cuda")
