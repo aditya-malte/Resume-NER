@@ -24,7 +24,7 @@ MAX_GRAD_NORM = 1.0
 MODEL_NAME = 'allenai/longformer-base-4096'
 TOKENIZER = LongformerTokenizer.from_pretrained('allenai/longformer-base-4096', lowercase=True)
 #TOKENIZER = BertTokenizerFast('./vocab/vocab.txt', lowercase=True)
-DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+DEVICE = torch.device("cuda")
 print(DEVICE)
 data = trim_entity_spans(convert_goldparse('data/Resumes.json'))
 
